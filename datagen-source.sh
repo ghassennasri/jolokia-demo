@@ -47,5 +47,6 @@ for i in {1..4}
 do 
 curl -X POST http://localhost:8778/jolokia/ -d '{"type":"read", "mbean":"kafka.producer:*"}' | jq > metrics_export${i}.txt
 echo  -e "exported metrics_export${i}.txt\n"
+
 sleep 5
 done
