@@ -14,6 +14,6 @@ Grafana datasource need to be set to influxDB database "telegraf". Data could th
 - Additional Mbeans could be added to ./conf/telegraf.conf file
 
 References:
-Jolokia protocol: https://jolokia.org/reference/html/protocol.html
-InfluxDB getting started: https://docs.influxdata.com/influxdb/v1.8/introduction/get-started/
-Get started with Grafana and InfluxDB: https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-influxdb/
+* Jolokia protocol: https://jolokia.org/reference/html/protocol.html
+* InfluxDB getting started: https://docs.influxdata.com/influxdb/v1.8/introduction/get-started/
+* Get started with Grafana and InfluxDB: https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-influxdb/
