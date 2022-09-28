@@ -1,4 +1,5 @@
 ---
+#some part were copied from https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%aa%84-specify-versions
 version: '3.5'
 services:
 
@@ -203,15 +204,6 @@ services:
       - grafana_volume:/var/lib/grafana
 
 volumes:
-  # will be <svc_name>_data
-  zookeeper_data:
-    driver: local
-  # will be <svc_name>_log
-  zookeeper_log:
-    driver: local
-  # will be <svc_name>_data 
-  kafka_data:
-    driver: local
   grafana_volume:
     driver: local
   influxdb_volume:
