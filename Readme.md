@@ -5,6 +5,8 @@ To run the demo ;
 As an example, the main script executes a jolokia query 4 times an export the result into files;
 curl -X POST http://localhost:8778/jolokia/ -d '{"type":"read", "mbean":"kafka.producer:*"}'
 
+Grafana datasource need to be set to influxDB database "telegraf". Data could then be explored through Grafana explore page. 
+
 - Jolokia is available at http://localhost:8778
 - InfluxDB is accessible by logging into influxdb container (docker exec -u -0 -it influxdb influx)
   Database is "telegraf".  
