@@ -11,7 +11,7 @@ sed -e "s|:NOW:|$NOW|g" \
     ${DIR}/schemas/shipments-template.avro > ${DIR}/schemas/shipments.avro
 
 docker-compose -f "${PWD}/docker-compose.yml" up -d
-#sleep 60
+sleep 60
 
 echo -e "Create topic orders\n"
 curl -s -X PUT \
