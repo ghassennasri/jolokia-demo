@@ -3,7 +3,7 @@ To run the demo ;
 ./datagen-source.sh
 ```
 As an example, the main script executes a jolokia query 4 times an export the result into files;
-curl -X POST http://localhost:8778/jolokia/ -d '{"type":"read", "mbean":"kafka.producer:*"}'
+curl -X POST http://localhost:8778/jolokia/ -d '{"type":"read", "mbean":"kafka.producer*:client-id=connector-producer-gna_datagen-0,type=producer-metrics,*"}'
 
 Grafana datasource need to be set to influxDB database "telegraf". Data could then be explored through Grafana explore page. 
 
