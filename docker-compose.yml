@@ -70,7 +70,7 @@ services:
       - ./jmx-exporter:/usr/share/jmx_exporter/
       - ./jolokia:/usr/share/jolokia
   connect:
-    image: confluentinc/cp-kafka-connect:latest
+    image: confluentinc/cp-server-connect:7.2.2
     hostname: connect
     container_name: connect
     restart: always
@@ -93,7 +93,7 @@ services:
       CONNECT_BOOTSTRAP_SERVERS: 'broker:9092'
       CONNECT_REST_ADVERTISED_HOST_NAME: connect
       CONNECT_GROUP_ID: "connect-cluster"
-      CONNECT_PRODUCER_CLIENT_ID: "connect-worker-producer"
+      #CONNECT_PRODUCER_CLIENT_ID: "connect-worker-producer"
       CONNECT_CONFIG_STORAGE_TOPIC: connect-configs
       CONNECT_OFFSET_STORAGE_TOPIC: connect-offsets
       CONNECT_STATUS_STORAGE_TOPIC: connect-status
@@ -123,7 +123,7 @@ services:
       # # With JDK9+, need to specify address=*:5005, see https://www.baeldung.com/java-application-remote-debugging#from-java9
       JAVA_DEBUG_OPTS: '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:5005'
       # uncomment when investigating class not found issue, see https://kafka-docker-playground.io/#/reusables?id=🔬-class-loading
-      KAFKA_OPTS: '-javaagent:/usr/share/jolokia/jolokia-jvm-1.7.1.jar=host=0.0.0.0'
+      KAFKA_OPTS: '-javaagent:/usr/share/jolokia/jolokia-jvm-1.7.1.jar=host=0.0.0.0' 
       # Reduce Connect memory utilization
       #EXTRA_ARGS: ${GRAFANA_AGENT_CONNECT}
       KAFKA_JVM_PERFORMANCE_OPTS: -server -XX:+UseG1GC -XX:GCTimeRatio=1

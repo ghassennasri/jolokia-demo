@@ -14,25 +14,29 @@ docker-compose -f "${PWD}/docker-compose.yml" up -d
 sleep 60
 
 echo -e "Create topic orders\n"
-curl -s -X PUT \
+curl -s -X POST \
       -H "Content-Type: application/json" \
       --data '{
+                "name": "gna_datagen",
+                "config": {
                 "connector.class": "io.confluent.kafka.connect.datagen.DatagenConnector",
                 "kafka.topic": "orders",
                 "key.converter": "org.apache.kafka.connect.storage.StringConverter",
                 "value.converter": "org.apache.kafka.connect.json.JsonConverter",
                 "value.converter.schemas.enable": "false",
-                "max.interval": 1,
-                 "iterations": "10000000",
-                "tasks.max": "10",
+                "max.interval": 2000,
+                 "iterations": "1000",
+                "tasks.max": "1",
                 "schema.filename" : "/tmp/schemas/orders.avro",
                 "schema.keyfield" : "orderid"
+               
+                }
             }' \
-      http://localhost:8083/connectors/datagen-orders/config | jq
+      http://localhost:8083/connectors | jq
 
 
 
-
+# "producer.override.client.id":"gna_dg-producer",
 
 
 sleep 10
@@ -45,8 +49,8 @@ timeout 60 docker exec broker kafka-console-consumer --bootstrap-server broker:9
 echo  -e "export producer kafka connect metrics from jolokia\n"
 for i in {1..4}
 do 
-curl -X POST http://localhost:8778/jolokia/ -d '{"type":"read", "mbean":"kafka.producer:*"}' | jq > metrics_export${i}.txt
+curl -X POST http://localhost:8778/jolokia/ -d '{"type":"read", "mbean":"kafka.producer*:client-id=connector-producer-gna_datagen-0,type=producer-metrics,*"}' | jq > metrics_export${i}.txt
 echo  -e "exported metrics_export${i}.txt\n"
 
-sleep 5
+sleep 10
 done
